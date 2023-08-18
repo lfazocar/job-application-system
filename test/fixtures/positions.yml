@@ -10,12 +10,12 @@
 #  updated_at :datetime         not null
 #
 
-one:
-  title: MyString
-  info: MyText
-  available: false
+available:
+  title: Available
+  info: Info
+  available: true
 
-two:
-  title: MyString
-  info: MyText
+not_available:
+  title: Not_available
+  info: Info
   available: false

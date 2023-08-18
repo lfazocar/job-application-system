@@ -11,11 +11,6 @@
 #
 
 one:
-  user: one
-  position: one
-  new: false
-
-two:
-  user: two
-  position: two
-  new: false
+  user: user
+  position: available
+  new: true

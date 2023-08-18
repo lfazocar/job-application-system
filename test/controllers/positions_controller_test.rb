@@ -1,48 +1,40 @@
 require "test_helper"
 
 class PositionsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
-    @position = positions(:one)
+    @available_position = positions(:available)
+    @not_available_position = positions(:not_available)
   end
 
-  test "should get index" do
+  test "should get index if logged in" do
+    sign_in users(:user)
     get positions_url
     assert_response :success
   end
 
-  test "should get new" do
-    get new_position_url
+  test "should redirect get index if not logged in" do
+    get positions_url
+    assert_response :redirect
+  end
+
+  test "should show available position" do
+    sign_in users(:user)
+    get position_url(@available_position)
     assert_response :success
   end
 
-  test "should create position" do
-    assert_difference("Position.count") do
-      post positions_url, params: { position: { available: @position.available, info: @position.info, title: @position.title } }
+  test "should create application" do
+    sign_in users(:user)
+    assert_difference("Application.count") do
+      post application_position_path(@available_position.id)
     end
-
-    assert_redirected_to position_url(Position.last)
   end
 
-  test "should show position" do
-    get position_url(@position)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_position_url(@position)
-    assert_response :success
-  end
-
-  test "should update position" do
-    patch position_url(@position), params: { position: { available: @position.available, info: @position.info, title: @position.title } }
-    assert_redirected_to position_url(@position)
-  end
-
-  test "should destroy position" do
-    assert_difference("Position.count", -1) do
-      delete position_url(@position)
+  test "should delete application" do
+    sign_in users(:user)
+    assert_difference("Application.count", -1) do
+      delete application_position_path(@available_position.id)
     end
-
-    assert_redirected_to positions_url
   end
 end
