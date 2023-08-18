@@ -3,7 +3,7 @@ class PositionsController < ApplicationController
 
   # Role permissions
   before_action :authenticate_user!
-  before_action except: %i[ index show ] do
+  before_action except: %i[ index show application delete_application ] do
     authorize_request(["admin"])
   end
 
@@ -32,7 +32,7 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @position.save
-        format.html { redirect_to position_url(@position), notice: "Position was successfully created." }
+        format.html { redirect_to position_url(@position), notice: "Job position was successfully created." }
         format.json { render :show, status: :created, location: @position }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class PositionsController < ApplicationController
   def update
     respond_to do |format|
       if @position.update(position_params)
-        format.html { redirect_to position_url(@position), notice: "Position was successfully updated." }
+        format.html { redirect_to position_url(@position), notice: "Job position was successfully updated." }
         format.json { render :show, status: :ok, location: @position }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +59,33 @@ class PositionsController < ApplicationController
     @position.destroy
 
     respond_to do |format|
-      format.html { redirect_to positions_url, notice: "Position was successfully destroyed." }
+      format.html { redirect_to positions_url, notice: "Job position was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  # POST application
+  def application
+    @application = current_user.applications.new(position_id: params[:id])
+
+    respond_to do |format|
+      if @application.save
+        format.html { redirect_to position_path(@application), notice: "Job application received." }
+        format.json { redirect_to position_path(format: :json), status: :created, location: @application }
+      else
+        format.html { redirect_to position_path, flash: { error: @application.errors.full_messages }}
+        format.json { render json: @application.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE application
+  def delete_application
+    @application = Application.find_by(position_id: params[:id], user_id: current_user.id)
+    @application.destroy
+
+    respond_to do |format|
+      format.html { redirect_to position_path, notice: "Job application deleted." }
       format.json { head :no_content }
     end
   end

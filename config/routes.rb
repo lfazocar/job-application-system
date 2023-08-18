@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   # Positions scaffold
-  resources :positions
+  resources :positions do
+    member do
+      post 'application'
+      delete 'application', to: 'positions#delete_application'
+    end
+  end
 
   # Devise
   devise_for :users, controllers: { registrations: 'registrations' }

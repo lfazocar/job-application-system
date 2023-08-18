@@ -14,6 +14,36 @@
   <%= link_to "Back to index", positions_path, class: "link-light" %>
 </div>
 
+<%# Job applications %>
+<% unless current_user.admin? %>
+  <% if current_user.applications.pluck(:position_id).include?(@position.id) %>
+    <%= button_to "Remove application", application_position_path, method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= button_to "Apply for this position", application_position_path, class: "btn btn-light" %>
+  <% end %>
+<% else %>
+  <h2 class="mb-3">Applications</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">User details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @position.applications.each do |application| %>
+        <tr>
+          <th scope="row"><%= application.id %></th>
+          <td><%= application.user.name %></td>
+          <td>TO DO</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%# Admin section %>
 <% if current_user.admin? %>
   <div class="card text-center">
     <h5 class="card-header">Admin panel</h5>
