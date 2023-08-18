@@ -10,6 +10,7 @@ class PositionsController < ApplicationController
   # GET /positions or /positions.json
   def index
     @positions = Position.all
+    @new_applications = Application.where(new: true).count
   end
 
   # GET /positions/1 or /positions/1.json

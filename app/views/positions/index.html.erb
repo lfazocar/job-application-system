@@ -1,14 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
-<h1>Positions</h1>
+<h1 class="text-center">Available positions</h1>
 
-<div id="positions">
+<% if current_user.admin? %>
+  <% if @new_applications > 0 %>
+    <div class="alert alert-info" role="alert">
+      There's <%= pluralize(@new_applications,'new job application')%>!
+    </div>
+  <% end %>
+  <div class="text-center mb-3">
+    <%= link_to "Publish new position", new_position_path, class: "btn btn-light" %>
+  </div>
+<% end %>
+
+<div id="positions" class="row gy-3 row-cols-1 row-cols-lg-2">
   <% @positions.each do |position| %>
-    <%= render position %>
-    <p>
-      <%= link_to "Show this position", position %>
-    </p>
+    <% if position.available? || current_user.admin? %>
+      <div class="col align-self-center">
+        <div class="card">
+          <h5 class="card-header"><%= position.title %></h5>
+          <div class="card-body">
+            <p class="card-text"><%= position.info %></p>
+            <% if current_user.admin? %>
+              <p class="card-text border-top pt-3">Status: <strong><%= position.available? ? 'Open' : 'Closed' %></strong></p>
+            <% end %>
+          </div>
+          <div class="card-footer text-center">
+            <%= link_to "Show this position", position, class: "btn btn-light" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
-
-<%= link_to "New position", new_position_path %>

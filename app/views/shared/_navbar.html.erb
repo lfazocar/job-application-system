@@ -8,9 +8,6 @@
       <ul class="navbar-nav">
         <span class="navbar-text">
           Welcome <strong><%= current_user.name %></strong>
-          <% if current_user.admin? && Application.where(new: true).count > 0 %>
-            | There's <strong><%= Application.where(new: true).count %></strong> new job application(s)!</span>
-          <% end %>
         </span>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
