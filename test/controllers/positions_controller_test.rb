@@ -29,6 +29,7 @@ class PositionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Application.count") do
       post application_position_path(@available_position.id)
     end
+    assert_redirected_to position_path
   end
 
   test "should delete application" do
@@ -36,5 +37,6 @@ class PositionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Application.count", -1) do
       delete application_position_path(@available_position.id)
     end
+    assert_redirected_to position_path
   end
 end

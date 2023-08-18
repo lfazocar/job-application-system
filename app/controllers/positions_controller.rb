@@ -15,6 +15,9 @@ class PositionsController < ApplicationController
 
   # GET /positions/1 or /positions/1.json
   def show
+    if !@position.available? && !current_user.admin?
+      authorize_request(["admin"])
+    end
   end
 
   # GET /positions/new
@@ -70,7 +73,7 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to position_path(@application), notice: "Job application received." }
+        format.html { redirect_to position_path, notice: "Job application received." }
         format.json { redirect_to position_path(format: :json), status: :created, location: @application }
       else
         format.html { redirect_to position_path, flash: { error: @application.errors.full_messages }}
