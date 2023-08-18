@@ -15,6 +15,21 @@
   <div class="text-center mb-3">
     <%= link_to "Publish new position", new_position_path, class: "btn btn-light" %>
   </div>
+<% else %>
+  <div class="dropend my-3">
+    <button class="btn btn-dark btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      My job applications
+    </button>
+    <ul class="dropdown-menu">
+    <% if current_user.applications.empty? %>
+      <li><span class="dropdown-item-text">You have no job applications</span></li>
+    <% else %>
+      <% current_user.applications.each do |application| %>
+        <li><%= link_to Position.find(application.position_id).title, position_path(application.position_id), class: "dropdown-item"%></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <div id="positions" class="row gy-3 row-cols-1 row-cols-lg-2">
