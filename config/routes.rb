@@ -6,9 +6,10 @@ Rails.application.routes.draw do
       delete 'application', to: 'positions#delete_application'
     end
   end
+  resources :users, only: [ :index, :show ]
 
   # Devise
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations' }, path: ''
 
   # Static views
   get '/home', to: "pages#home"

@@ -1,0 +1,35 @@
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<div id="<%= dom_id @user %>" class="mb-3">
+  <h1>Name: <%= @user.name %></h1>
+  <h2>User info:</h2>
+  <p><%= @user.bio %></p>
+  <%= link_to "Back", :back, class: "link-light" %>
+</div>
+
+<%# Job applications %>
+<h2 class="mb-3">Applications</h2>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Position title</th>
+      <th scope="col">Position details</th>
+      <th scope="col">New</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.applications.each do |application| %>
+      <tr>
+        <th scope="row"><%= application.id %></th>
+        <td><%= Position.find(application.position_id).title %></td>
+        <td><%= link_to "Position details", position_path(application.position_id), class: "link-light" %></td>
+        <td><%= application.new? ? 'Yes' : 'No' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
