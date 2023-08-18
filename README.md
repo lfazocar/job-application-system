@@ -57,6 +57,7 @@ Only registered users can access the plaform, unregistered users can only see a 
 * Connect to app using ```heroku git:remote -a app_name```
 * Upload app using ```git push heroku main```
 * Run migrations using ```heroku run rails db:migrate```
+* Optional: Seed admin and user account + 10 job positions with ```heroku run rails db:seed``` (passwords are ```adminpassword``` and ```userpassword``` respectively)
 * Configure environment variables for Amazon S3 in Heroku's app settings:
     * Access key ID in ```aws_access_key_id```
     * Secret access key in ```aws_secret_access_key```
