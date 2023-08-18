@@ -5,6 +5,11 @@
     <%= link_to "Back", :back, class: "link-light" %>
 
     <h3>Name: <%= current_user.name %></h3>
+    <% if current_user.profile_picture.attached? %>
+      <%= image_tag current_user.profile_picture, class:"img-thumbnail mb-3", style:"height: 250px" %>
+    <% else %>
+      <p class="text-body-secondary">No profile picture</p>
+    <% end %>
     <h6>User info:</h6>
     <p><%= current_user.bio %></p>
 
@@ -14,6 +19,11 @@
       <div class="field mb-3">
         <%= f.label :bio, 'Updated user info', class: "form-label" %>
         <%= f.text_area :bio, class: "form-control", placeholder: "Your bio here...", rows: "5" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :profile_picture, class: "form-label" %>
+        <%= f.file_field :profile_picture, class: "form-control" %>
       </div>
 
       <div class="field mb-3">

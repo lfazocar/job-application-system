@@ -6,6 +6,11 @@
 
 <div id="<%= dom_id @user %>" class="mb-3">
   <h1>Name: <%= @user.name %></h1>
+  <% if @user.profile_picture.attached? %>
+    <%= image_tag @user.profile_picture, class:"img-thumbnail mb-3", style:"height: 250px" %>
+  <% else %>
+    <p class="text-body-secondary">No profile picture</p>
+  <% end %>
   <h2>User info:</h2>
   <p><%= @user.bio %></p>
   <%= link_to "Back", :back, class: "link-light" %>
