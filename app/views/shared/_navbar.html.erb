@@ -23,14 +23,13 @@
             <li class="nav-item">
               <%= link_to "Edit user details", edit_user_registration_path, class: "dropdown-item" %>
             </li>
-            <% if current_user.admin? %>
-              <li><hr class="dropdown-divider"></li>
-              <li class="nav-item">
-                <%= link_to "Register new user", new_user_registration_path, class: "dropdown-item" %>
-              </li>
-            <% end %>
           </ul>
         </li>
+      <% if current_user.admin? %>
+        <li class="nav-item">
+          <%= link_to "Register new user", new_user_registration_path, class: "nav-link" %>
+        </li>
+      <% end %>
       </ul>
     </div>
   </div>

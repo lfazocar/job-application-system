@@ -23,6 +23,9 @@ class User < ApplicationRecord
   # Associations
   has_many :applications, dependent: :destroy
 
+  # Validations
+  validates :name, presence: true
+
   # 0 = user, 1 = admin
   enum :role, [:user, :admin]
 
