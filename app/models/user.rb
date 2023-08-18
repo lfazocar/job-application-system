@@ -12,6 +12,7 @@
 #  bio                    :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :integer          default("user")
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -21,4 +22,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :applications, dependent: :destroy
+
+  # 0 = user, 1 = admin
+  enum :role, [:user, :admin]
 end

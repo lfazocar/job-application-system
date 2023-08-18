@@ -1,6 +1,12 @@
 class PositionsController < ApplicationController
   before_action :set_position, only: %i[ show edit update destroy ]
 
+  # Role permissions
+  before_action :authenticate_user!
+  before_action except: %i[ index show ] do
+    authorize_request(["admin"])
+  end
+
   # GET /positions or /positions.json
   def index
     @positions = Position.all
