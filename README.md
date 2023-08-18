@@ -16,7 +16,39 @@ Only registered users can access the plaform, unregistered users can only see a 
 
 ## Views
 
-TODO
+### General
+
+#### Home
+![Home](readme/home.webp)
+
+### Admin views
+
+#### Positions index
+![Positions index - Admin](readme/position_index_admin.webp)
+
+#### Show position
+![Position show - Admin](readme/show_admin.webp)
+
+#### Edit position
+![Position edit](readme/edit.webp)
+
+#### User index
+![User index](readme/user_index.webp)
+
+#### User details
+![User details - Admin](readme/user_details_admin.webp)
+
+### User views
+
+#### Positions index
+![Positions index - User](readme/position_index_user.webp)
+
+#### Show position
+![Position show - User](readme/show_user.webp)
+
+### Entity Relationship Diagram
+
+![ERD](readme/erd.png)
 
 ## Deploy on Heroku via CLI
 
@@ -42,7 +74,7 @@ TODO
 
 * [Annotate 3.2.0](https://github.com/ctran/annotate_models)  
 * [Devise 4.9.2](https://github.com/heartcombo/devise)  
-* [AWS SDK S3 1.132](https://github.com/aws/aws-sdk-rails)  
+* [AWS SDK S3 1.132](https://github.com/aws/aws-sdk-rails) (to store profile pictures)  
 * [Faker 3.2](https://github.com/faker-ruby/faker)
 
 ## Possible improvements
