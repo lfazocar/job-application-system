@@ -1,10 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
-<%= render @position %>
-
-<div>
-  <%= link_to "Edit this position", edit_position_path(@position) %> |
-  <%= link_to "Back to positions", positions_path %>
-
-  <%= button_to "Destroy this position", @position, method: :delete %>
+<div id="<%= dom_id @position %>" class="mb-3">
+  <h1>Title: <%= @position.title %></h1>
+  <h2>Information:</h2>
+  <p><%= @position.info %></p>
+  <% if current_user.admin? %>
+    <p class="border-top pt-3">Status: <strong><%= @position.available? ? 'Open' : 'Closed' %></strong></p>
+  <% end %>
+  <%= link_to "Back to index", positions_path, class: "link-light" %>
 </div>
+
+<% if current_user.admin? %>
+  <div class="card text-center">
+    <h5 class="card-header">Admin panel</h5>
+    <div class="card-body">
+      <div class="d-flex justify-content-evenly">
+        <%= link_to "Edit this position", edit_position_path(@position), class: "btn btn-light" %>
+        <%= button_to "Destroy this position", @position, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+<% end %>
