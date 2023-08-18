@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: positions
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  info       :text
+#  available  :boolean          default(TRUE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  title: MyString
+  info: MyText
+  available: false
+
+two:
+  title: MyString
+  info: MyText
+  available: false
