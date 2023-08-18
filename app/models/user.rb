@@ -25,4 +25,8 @@ class User < ApplicationRecord
 
   # 0 = user, 1 = admin
   enum :role, [:user, :admin]
+
+  def admin?
+    self.role == 'admin'
+  end
 end

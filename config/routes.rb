@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :positions
 
   # Devise
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   # Static views
   get '/home', to: "pages#home"
